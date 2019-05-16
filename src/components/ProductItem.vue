@@ -1,11 +1,12 @@
 <template>
     <div v-if="productItem" class="c-product-item">
         <div class="info">
-            <span>{{ productItem.name }}</span>
+            <span @click="openDetail">{{ productItem.name }}</span>
             <span>{{ productItem.price | currency }}</span>
         </div>
         <div class="toolbar">
             <button @click="$emit('addToCart', productItem)">Agregar</button>
+            <button @click="openDetail(productItem.id)">Detalle</button>
         </div>
     </div>
 </template>
@@ -15,6 +16,11 @@ export default {
     name:'ProductItem',
     props:{
         productItem:Object
+    },
+    methods:{
+        openDetail(id){
+            this.$router.push(`/product/${id}`)
+        }
     }
 }
 </script>
@@ -38,7 +44,7 @@ export default {
 
     button{
         float:right;
-        height:100%;
+        height:50%;
         width:100%;
         display:block;
         border-radius:5px;

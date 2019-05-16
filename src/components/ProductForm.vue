@@ -26,7 +26,7 @@ export default {
                         price: this.price
                     })
                 }else{
-                    console.log('Algo Falló');
+                    //console.log('Algo Falló');
                 }
             })
         }

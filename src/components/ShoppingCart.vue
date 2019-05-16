@@ -9,53 +9,48 @@
 </template>
 
 <!--ESTILOS-->
-<style scoped>
+<style lang="less" scoped>
+    @bgColor: lightcoral;
+
     h1{font-size:24px; color:#41b883;}
-    .cart-total{font-size:18px; color:lightcoral;}
+    .cart-total{font-size:18px; color:@bgColor;}
 </style>
 
 <script>
 import ProductItem from './ProductItem.vue'
 import ProductForm from './ProductForm.vue'
-import Axios from 'axios';
+import { mapState, mapMutations } from 'vuex';
+//import Axios from 'axios';
 
 
 export default {
     name: 'SoppingCart',
     beforeCreate() {},
-    created() {
-        Axios.get('https://api.myjson.com/bins/hoto8').then(response => {
-            this.productList = response.data.products;
-        });
-    },
     components: {
         ProductItem,
         ProductForm
     },
-    data() {
-        return {
-            productList: [],
-            cart: []
-        }
-    },
     methods:{
-        addToProductList(productItem){
+       /* addToProductList(productItem){
             productItem.id = this.productList.length + 1;
             productItem.quantity = 0;
 
             this.productList.push(productItem);
-        },
+        },*/
 
         addToCart(productItem){
             this.cart.push(productItem);
-        }
+        },
+
+        ...mapMutations(['addToProductList','addToCart'])
     },
     computed: {
         total(){
             return this.cart.reduce(function(sum, currItem){
                 return sum + currItem.price;
             },0);
-        }
+        },
+        ...mapState(['productList', 'cart'])
     }
 }
 </script>

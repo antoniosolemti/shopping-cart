@@ -1,26 +1,24 @@
 <template>
   <div id="app">
-    <img class="logo" alt="Vue logo" src="./assets/shopping-logo.jpg">
-    <ShoppingCart />
+    <Header />
   </div>
 </template>
 
 <script>
-/*import HelloWorld from './components/HelloWorld.vue'*/
-
-import ShoppingCart from './components/ShoppingCart.vue'
-
-/*Vue.filter('currency', function(param){
-  return '$' + parseFloat(param).toFixed(2);
-})*/
+import Header from './components/Header.vue'
 
 export default {
-  name: 'app',
-  components: {
-    ShoppingCart
+  name: 'App',
+  components:{
+    Header
+  },
+  created(){
+    //action to get products
+    this.$store.dispatch('fetchProducts');
   }
 }
 </script>
+
 
 <style>
 #app {
